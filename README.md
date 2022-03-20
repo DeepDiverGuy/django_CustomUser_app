@@ -6,16 +6,15 @@
 
 A minimal Customized User app for django that has Email Verification functionalities by both sending links and OTP Tokens. Key functionalities are:
 
-		- user-registration
-		- activating user account upon clicking a link sent to a user's email address
-		- login & logout
-		- viewing and updating profile
-		- changing email address of a user upon a successful OTP verification
-		- password-change and password-reset
-		- OTP verification
-		- deleting a user after a successful OTP verification and password check.
-		- using uuid field to identify a user instead of using an insecure pk
-		- using email as the username field
+- user-registration
+- activating user account upon clicking a link sent to a user's email address
+- login & logout
+- viewing and updating profile
+- changing email address of a user upon a successful OTP verification
+- password-change and password-reset with email
+- OTP verification
+- deleting a user after a successful OTP verification and password-check.
+- using uuid into URLs to identify a user instead of using an insecure pk
 
 
 
