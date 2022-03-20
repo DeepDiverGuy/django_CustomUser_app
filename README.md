@@ -15,6 +15,7 @@ A minimal Customized User app for django that has Email Verification functionali
 - OTP verification
 - deleting a user after a successful OTP verification and password-check.
 - using uuid into URLs to identify a user instead of using an insecure pk
+- using email as the username field
 
 
 
