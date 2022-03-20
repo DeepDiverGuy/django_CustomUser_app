@@ -1,4 +1,4 @@
-from .models import user
+from .models import user as c_user
 
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
@@ -8,6 +8,7 @@ from django import forms
 from django.utils.translation import ngettext_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
+from django.conf import settings
 
 from django_otp.forms import OTPTokenForm
 
@@ -25,7 +26,7 @@ class CustomUserCreationForm(UserCreationForm):
         return user
     
     class Meta:
-        model = user
+        model = c_user
         fields = ('first_name', 'last_name', 'email')
         field_classes = {'email': UsernameField}
 
@@ -55,7 +56,7 @@ class ModifiedAuthenticationForm(AuthenticationForm):
 
             if self.user_cache is None:
                 try:
-                    unauthenticated_user = user.objects.get(email=username) 
+                    unauthenticated_user = c_user.objects.get(email=username) 
                     # because "authenticate()" method returns None if the user is inactive or not authenticated.                   
                 except:
                     unauthenticated_user = None
@@ -150,6 +151,7 @@ class CustomOTPTokenFormChangeEmail(CustomOTPTokenForm):
             return
 
         validation_error = None
+
         with transaction.atomic():
             try:
                 device = self._chosen_device(user)
@@ -192,6 +194,10 @@ class CustomOTPTokenFormChangeEmail(CustomOTPTokenForm):
 
 
     def _handle_challenge(self, device):
+        if c_user.objects.filter(email = self.cleaned_data['new_email']).exists():
+            raise forms.ValidationError(
+                self.otp_error_messages['challenge_exception'].format("This email address already exists to an account"), code='challenge_exception'
+            )
         try:
             device.email = self.cleaned_data['new_email'] # The value of device.email is used to deliver the token
             challenge = device.generate_challenge() if (device is not None) else None
