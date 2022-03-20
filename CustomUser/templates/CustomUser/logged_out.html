@@ -1,0 +1,15 @@
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message.tags }}: {{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<p> You've been logged out. Thanks for spending some quality time with the web site today.</p>
+
+<p><a href="{% url 'CustomUser:login' %}">Log In again</a></p>
+
+{% endblock %}

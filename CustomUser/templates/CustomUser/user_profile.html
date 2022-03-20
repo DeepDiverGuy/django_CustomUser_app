@@ -1,0 +1,16 @@
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message.tags }}: {{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+Welcome to your Profile! <h1> {{ object.first_name }} </h1>
+
+<p>First Name: {{ object.first_name }}</p>
+<p>Last Name: {{ object.last_name }}</p>
+<p>Email Address: {{ object.email }}</p>
+
+<p> <a class="ml-2" href="{% url 'CustomUser:update' request.user.uuid_value %}"> Update Profile </a> </p>
+<p> <a class="ml-2" href="{% url 'CustomUser:logout' %}"> Log out </a> </p>

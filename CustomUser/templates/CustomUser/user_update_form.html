@@ -1,0 +1,19 @@
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message.tags }}: {{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="post">
+{% csrf_token %}
+{{form.non_field_errors}}
+
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+    <p> <a href="{% url 'CustomUser:change_email' %}"> Change Email </a> </p>
+    <p> <a href="{% url 'CustomUser:password_change' %}"> Change Password </a> </p>
+    <p> <a href="{% url 'CustomUser:delete' %}"> Delete Profile </a> </p>
+    
+</form>

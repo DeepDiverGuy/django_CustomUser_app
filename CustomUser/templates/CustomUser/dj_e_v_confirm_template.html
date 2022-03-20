@@ -1,0 +1,13 @@
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message.tags }}: {{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if success %}
+    {{ user.first_name }}, your account is confirmed!
+{% else %}
+    Error, invalid token!
+{% endif %}

@@ -1,0 +1,32 @@
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message.tags }}: {{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<h2> OTP Verification Required </h2>
+
+<form method="POST">
+{% csrf_token %}
+{{ form.non_field_errors }}
+
+    {% if form.get_user %}
+        <div class="form-row"> 
+            {{ form.otp_device.errors }} 
+            <p> Email Address to send an OTP Token: {{ form.otp_device }} <input type="submit" name="otp_challenge" value="Send Token" /> </p>
+        </div>
+    {% endif %}
+
+    <div class="form-row"> 
+        <p> {{ form.otp_token.errors }}{{ form.otp_token.label_tag }}{{ form.otp_token }} </p> 
+    </div>
+
+    <div class="submit-row">
+        <p>
+            <input type="submit" value="Verify"/>
+        </p>
+    </div>
+
+</form>

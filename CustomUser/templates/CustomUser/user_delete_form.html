@@ -1,0 +1,27 @@
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message.tags }}: {{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="post">
+{% csrf_token %}
+{{ form.non_field_errors }}
+
+    <p> {{user.first_name}}, Are you sure you want to delete your account <b>permanently</b>? </p>
+
+    <p> <b>Note:</b> If you choose to delete your account, it's going to be deleted permanently from our database. Please proceed with precaution. </p>
+
+    <p> For security reasons, please type your password correctly </p>
+
+    {{ form.as_p }}
+
+    <input type="submit" value="Delete My Account and Logout">
+
+ </form>
+
+ {% endblock %}
