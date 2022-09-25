@@ -28,7 +28,8 @@ A minimal Customized User app for django that has Email Verification functionali
 
 
 # Installation:
-- Just copy-paste or add the "CustomUser" app (CustomUser directory) inside your django project.
+- After cloning this repo, just copy-paste or add the "CustomUser" app (CustomUser directory) inside your django project.
+- Then proceed to the configurations described below
 
 
 
